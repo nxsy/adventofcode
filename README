@@ -4,7 +4,7 @@ Look in examples/ for the code.
 
 Execute like:
 
-    $ cargo run --example part1 example_input
+    $ cargo run --example day7 part1 example_input
 
 Parts: `part1` and `part2`
 Inputs: `example_input`, `final_input`
