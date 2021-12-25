@@ -21,7 +21,7 @@ enum Input {
 }
 
 #[derive(Debug, StructOpt)]
-#[structopt(name = "day21", about = "Advent of Code 2121 Day 21")]
+#[structopt(name = "day21", about = "Advent of Code 2021 Day 21")]
 pub struct Args {
     part: Part,
     input: Input,
