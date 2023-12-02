@@ -6,8 +6,7 @@ use clap::Parser;
 use nom::{
     branch::alt,
     bytes::complete::tag,
-    character::complete::digit1,
-    combinator::map_res,
+    character::complete::u32 as nom_u32,
     multi::separated_list1,
     sequence::{preceded, separated_pair},
     IResult,
@@ -104,17 +103,15 @@ fn parse_ball(input: &str) -> IResult<&str, Ball> {
 }
 
 fn parse_bag(input: &str) -> IResult<&str, Bag> {
-    let (input, balls) = separated_list1(
-        tag(", "),
-        separated_pair(map_res(digit1, str::parse::<u32>), tag(" "), parse_ball),
-    )(input)?;
+    let (input, balls) =
+        separated_list1(tag(", "), separated_pair(nom_u32, tag(" "), parse_ball))(input)?;
     Ok((input, Bag::from(balls)))
 }
 
 fn line_to_games(input: &str) -> Result<Game> {
     // Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
     let (_, (game_number, bags)) = separated_pair(
-        preceded(tag("Game "), map_res(digit1, str::parse::<u32>)),
+        preceded(tag("Game "), nom_u32),
         tag(": "),
         separated_list1(tag("; "), parse_bag),
     )(input)
