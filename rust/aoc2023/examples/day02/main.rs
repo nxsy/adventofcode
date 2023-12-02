@@ -117,7 +117,8 @@ fn line_to_games(input: &str) -> Result<Game> {
         preceded(tag("Game "), map_res(digit1, str::parse::<u32>)),
         tag(": "),
         separated_list1(tag("; "), parse_bag),
-    )(input).map_err(|e| e.to_owned())?;
+    )(input)
+    .map_err(|e| e.to_owned())?;
     Ok(Game { game_number, bags })
 }
 
@@ -154,7 +155,9 @@ fn part2(file_data: &str) -> Result<()> {
         .map(|g| {
             g.bags
                 .iter()
-                .fold(Bag::new(), |combined_bag, b| combined_bag.minimum_combined_bag(b))
+                .fold(Bag::new(), |combined_bag, b| {
+                    combined_bag.minimum_combined_bag(b)
+                })
                 .power()
         })
         .sum();

@@ -79,10 +79,10 @@ fn partial_line_to_number(s: &str) -> Option<u8> {
 }
 
 fn line_to_number_part2(line: &str) -> Result<u32> {
-    let numbers: Vec<u8> = 
-        (0..line.len()).filter_map(|i| partial_line_to_number(&line[i..]))
+    let numbers: Vec<u8> = (0..line.len())
+        .filter_map(|i| partial_line_to_number(&line[i..]))
         .collect();
-    
+
     if numbers.is_empty() {
         anyhow::bail!("No numbers found in line: {}", line);
     }
