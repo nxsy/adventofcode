@@ -111,7 +111,7 @@ fn parse_bag(input: &str) -> IResult<&str, Bag> {
 fn line_to_games(input: &str) -> Result<Game> {
     // Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
     let (_, (game_number, bags)) = separated_pair(
-        preceded(tag("Game "), nom_u32),
+        preceded(tag("Game"), nom_u32),
         tag(": "),
         separated_list1(tag("; "), parse_bag),
     )(input)
